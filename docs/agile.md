@@ -9,11 +9,11 @@ Agile es una metodología de desarrollo de software basada en la flexibilidad, l
 Scrum es un framework dentro de Agile que organiza el trabajo en ciclos llamados sprints.
 
 Elementos principales:
-- Product Owner: define prioridades
-- Scrum Master: facilita el proceso
-- Equipo de desarrollo: construye el producto
-- Sprint: periodo corto de trabajo
-- Backlog: lista de tareas
+Product Owner: define prioridades
+Scrum Master: facilita el proceso
+Equipo de desarrollo: construye el producto
+Sprint: periodo corto de trabajo
+Backlog: lista de tareas
 
 ---
 
