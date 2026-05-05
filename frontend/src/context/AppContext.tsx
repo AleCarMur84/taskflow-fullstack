@@ -1,31 +1,34 @@
  /* eslint-disable react-refresh/only-export-components */
 
-import { createContext, useState } from "react";
-import type { ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 
-type Employee = {
+export interface Employee {
   id: string;
   name: string;
-  role: string;
-  email: string;
-};
+  position: string;
+}
 
-type AppContextType = {
+interface AppContextType {
   employees: Employee[];
-  addEmployee: (emp: Employee) => void;
-};
+  addEmployee: (employee: Employee) => void;
+  removeEmployee: (id: string) => void;
+}
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
-  const addEmployee = (emp: Employee) => {
-    setEmployees((prev) => [...prev, emp]);
+  const addEmployee = (employee: Employee) => {
+    setEmployees((prev) => [...prev, employee]);
+  };
+
+  const removeEmployee = (id: string) => {
+    setEmployees((prev) => prev.filter((e) => e.id !== id));
   };
 
   return (
-    <AppContext.Provider value={{ employees, addEmployee }}>
+    <AppContext.Provider value={{ employees, addEmployee, removeEmployee }}>
       {children}
     </AppContext.Provider>
   );

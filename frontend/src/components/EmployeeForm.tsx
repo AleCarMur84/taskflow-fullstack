@@ -5,26 +5,27 @@ export default function EmployeeForm() {
   const { addEmployee } = useAppContext();
 
   const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [email, setEmail] = useState("");
+  const [position, setPosition] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    addEmployee({
+    if (!name || !position) return;
+
+    const newEmployee = {
       id: crypto.randomUUID(),
       name,
-      role,
-      email,
-    });
+      position
+    };
+
+    addEmployee(newEmployee);
 
     setName("");
-    setRole("");
-    setEmail("");
+    setPosition("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 p-4 border rounded-lg bg-white">
+    <form onSubmit={handleSubmit} className="space-y-3">
       <input
         className="border p-2 w-full"
         placeholder="Nombre"
@@ -34,22 +35,12 @@ export default function EmployeeForm() {
 
       <input
         className="border p-2 w-full"
-        placeholder="Rol"
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
+        placeholder="Puesto"
+        value={position}
+        onChange={(e) => setPosition(e.target.value)}
       />
 
-      <input
-        className="border p-2 w-full"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-      >
+      <button className="bg-blue-500 text-white px-4 py-2">
         Añadir empleado
       </button>
     </form>
