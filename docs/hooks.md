@@ -1,6 +1,6 @@
 # Hooks en React - Fase 5 (Punto 7)
 
-Este documento explica el uso de los hooks de React implementados en el proyecto TaskFlow Fullstack.
+Este documento explica el uso de los hooks de React implementados en el git aproyecto TaskFlow Fullstack.
 
 ---
 
