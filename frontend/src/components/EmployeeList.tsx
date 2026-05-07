@@ -15,8 +15,7 @@ export default function EmployeeList() {
           className="p-4 border rounded-lg shadow-sm bg-white"
         >
           <h3 className="font-bold">{emp.name}</h3>
-          <p className="text-sm text-gray-600">{emp.role}</p>
-          <p className="text-sm text-gray-500">{emp.email}</p>
+          <p className="text-sm text-gray-600">{emp.position}</p>
         </div>
       ))}
     </div>
