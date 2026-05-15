@@ -4,8 +4,7 @@ export interface Employee {
   position: string;
 }
 
-const BASE_URL = "http://localhost:3000/api/employees";
-
+const BASE_URL = "https://taskflow-fullstack-1-lrsm.onrender.com/api/employees";
 // GET empleados
 export const getEmployees = async (): Promise<Employee[]> => {
   const res = await fetch(BASE_URL);
