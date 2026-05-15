@@ -1,34 +1,44 @@
 import { useState } from "react";
-import { useAppContext } from "../hooks/useAppContext";
+import { createEmployee } from "../api/client";
 
-export default function EmployeeForm() {
-  const { addEmployee } = useAppContext();
+type Props = {
+  onEmployeeCreated?: () => void;
+};
 
+export default function EmployeeForm({ onEmployeeCreated }: Props) {
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name || !position) {
-      alert("Todos los campos son obligatorios");
+      setError("Todos los campos son obligatorios");
+      setSuccess(false);
       return;
     }
 
-    const newEmployee = {
-      id: crypto.randomUUID(),
-      name,
-      position
-    };
+    try {
+      await createEmployee({
+        name,
+        position
+      });
 
-    addEmployee(newEmployee);
+      setName("");
+      setPosition("");
+      setError("");
+      setSuccess(true);
 
-    setName("");
-    setPosition("");
+      onEmployeeCreated?.();
 
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 2000);
+      setTimeout(() => setSuccess(false), 2000);
+
+    } catch {
+      setError("Error al crear empleado");
+      setSuccess(false);
+    }
   };
 
   return (
@@ -36,6 +46,12 @@ export default function EmployeeForm() {
       {success && (
         <p className="text-green-600">
           Empleado añadido correctamente
+        </p>
+      )}
+
+      {error && (
+        <p className="text-red-600">
+          {error}
         </p>
       )}
 

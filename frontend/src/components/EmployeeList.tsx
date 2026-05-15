@@ -1,21 +1,32 @@
-import { useAppContext } from "../hooks/useAppContext";
+import type { Employee } from "../api/client";
 
-export default function EmployeeList() {
-  const { employees } = useAppContext();
+type Props = {
+  employees?: Employee[];
+  onDelete?: (id: string) => void;
+};
 
-  if (employees.length === 0) {
-    return <p className="text-gray-500">No hay empleados</p>;
-  }
-
+export default function EmployeeList({
+  employees = [],
+  onDelete
+}: Props) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {employees.map((emp) => (
         <div
           key={emp.id}
-          className="p-4 border rounded-lg shadow-sm bg-white"
+          className="p-2 border rounded flex justify-between items-center"
         >
-          <h3 className="font-bold">{emp.name}</h3>
-          <p className="text-sm text-gray-600">{emp.position}</p>
+          <div>
+            <p className="font-semibold">{emp.name}</p>
+            <p className="text-sm text-gray-500">{emp.position}</p>
+          </div>
+
+          <button
+            onClick={() => onDelete?.(emp.id)}
+            className="bg-red-500 text-white px-3 py-1 rounded"
+          >
+            Eliminar
+          </button>
         </div>
       ))}
     </div>

@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# TaskFlow - Fullstack Project (Fase 5)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+##  Descripción
 
-Currently, two official plugins are available:
+TaskFlow es una aplicación web desarrollada con React y TypeScript que permite gestionar empleados mediante un formulario y una lista dinámica.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+El proyecto forma parte de la Fase 5 del bootcamp, donde se aplica arquitectura moderna frontend con despliegue real en producción.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Funcionalidades
 
-## Expanding the ESLint configuration
+Añadir empleados mediante formulario controlado
+Gestión de estado global con Context API
+Visualización dinámica de empleados
+Routing con React Router
+Página principal + 404
+Diseño responsive básico
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tecnologías usadas
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+React
+TypeScript
+Vite
+React Router
+Tailwind CSS
+Context API
+Vercel (deploy)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌐 Despliegue
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+https://taskflow-fullstack-git-main-alecarmur84s-projects.vercel.app
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+##  Estructura del proyecto
+
+frontend/
+  src/
+    components/
+    pages/
+    context/
+    hooks/
+    App.tsx
+    main.tsx
+
+---
+
+##  Notas
+
+Proyecto frontend con arquitectura modular, tipado estricto y despliegue en producción.
+
+---
+
+##  Autor
+
+Bootcamp desarrollo web

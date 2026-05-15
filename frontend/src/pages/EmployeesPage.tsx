@@ -1,42 +1,79 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
-import EmployeeForm from "../components/EmployeeForm";
-import EmployeeList from "../components/EmployeeList";
+import { useState } from "react";
+import { createEmployee } from "../api/client";
 
-export default function EmployeesPage() {
-  const [estado, setEstado] = useState<string>("Inicial");
+type Props = {
+  onEmployeeCreated?: () => void;
+};
 
-  // useCallback: función estable (no se recrea en cada render)
-  const cambiarEstado = useCallback(() => {
-    setEstado("Hooks funcionando con useCallback");
-  }, []);
+export default function EmployeeForm({ onEmployeeCreated }: Props) {
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    console.log("EmployeesPage cargada");
-  }, []);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-  const estadoLongitud = useMemo(() => {
-    return estado.length;
-  }, [estado]);
+    if (!name || !position) {
+      setError("Todos los campos son obligatorios");
+      setSuccess(false);
+      return;
+    }
+
+    try {
+      await createEmployee({
+        name,
+        position
+      });
+
+      setName("");
+      setPosition("");
+      setError("");
+      setSuccess(true);
+
+      onEmployeeCreated?.();
+
+      setTimeout(() => setSuccess(false), 2000);
+
+    } catch {
+      setError("Error al crear empleado");
+      setSuccess(false);
+    }
+  };
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Empleados</h1>
+    <div className="space-y-2">
+      {success && (
+        <p className="text-green-600">
+          Empleado añadido correctamente
+        </p>
+      )}
 
-      <p className="text-gray-500">{estado}</p>
+      {error && (
+        <p className="text-red-600">
+          {error}
+        </p>
+      )}
 
-      <p className="text-sm text-gray-600">
-        Longitud del estado: {estadoLongitud}
-      </p>
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <input
+          className="border p-2 w-full"
+          placeholder="Nombre"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-      <button
-        onClick={cambiarEstado}
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-      >
-        Probar useState
-      </button>
+        <input
+          className="border p-2 w-full"
+          placeholder="Puesto"
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
+        />
 
-      <EmployeeForm />
-      <EmployeeList />
+        <button className="bg-blue-500 text-white px-4 py-2">
+          Añadir empleado
+        </button>
+      </form>
     </div>
   );
 }
